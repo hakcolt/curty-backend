@@ -6,4 +6,5 @@ export interface ILinkRepository {
   fetchBy(where: Record<string, any>): Promise<Link | null>
   fetchListBy(where: Record<string, any>): Promise<Link[]>
   create(link: ILink): Promise<Link | null>
+  deleteOne(where: Record<string, any>): Promise<boolean>
 }

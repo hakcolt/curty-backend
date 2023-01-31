@@ -40,6 +40,6 @@ export abstract class BaseController {
       }
       const resultFormatted = this.getResultToResponse(res, result)
       res.status(resultFormatted.statusCode).json(resultFormatted)
-    } catch (e) { next(e) }
+    } catch (e: any) { next(e) }
   }
 }

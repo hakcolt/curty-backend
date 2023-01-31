@@ -1,7 +1,8 @@
 export interface ILink {
-  id: string | null
-  name: string
+  id: string | undefined
+  name: string | undefined
   path: string
   url: string
+  createdAt: string
   userId: string
 }

@@ -8,7 +8,8 @@ export class URLConstraint {
 
   static Links = {
     List: { method: "get", path: "/v1/links" },
-    Create: { method: "post", path: "/v1/links" }
+    Create: { method: "post", path: "/v1/links" },
+    Delete: { method: "delete", path: "/v1/links/:id" }
   }
 
   static Health = {

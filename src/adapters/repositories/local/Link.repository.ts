@@ -34,5 +34,9 @@ export class LocalLinkRepository implements ILinkRepository {
   async create(linkData: ILink): Promise<Link | null> {
     return linkModel.create(linkData)
   }
+
+  async deleteOne(where: Record<string, any>): Promise<boolean> {
+    return linkModel.delete(where.id, where.userId)
+  }
 }
 

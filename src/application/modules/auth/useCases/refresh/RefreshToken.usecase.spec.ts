@@ -12,7 +12,7 @@ AppSettings.init(config)
 describe("when try refresh access token", () => {
   let loginUseCase: RefreshTokenUseCase
   let auth: AuthProvider
-  
+
   beforeAll(() => {
     const repo = new LocalUserRepository()
     auth = new AuthProvider()
@@ -26,7 +26,7 @@ describe("when try refresh access token", () => {
     }, true)
     dbMock.users[1].refreshToken = session.token
     const result = await loginUseCase.execute(session.token)
-    
+
     expect(result.error).toBeUndefined()
     expect(result.message).toBe(loginUseCase.resources.get(strings.USER_ALREADY_LOGGED_IN))
     expect(result.statusCode).toBe(200)
@@ -49,7 +49,7 @@ describe("when try refresh access token", () => {
     const authProviderTemp = new AuthProvider()
 
     authProviderTemp.verifyJWT = () => true
-  
+
     const loginUserCaseTemp = new RefreshTokenUseCase(createResource(), repositoryTemp, authProviderTemp)
     const result = await loginUserCaseTemp.execute("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI5MTc3YTk1ZC02ZjgzLTQ3OGQtOTY4ZC03M2JlNWEyZGYyNGQiLCJlbWFpbCI6InRlc3RAZ21haWwuY29tIiwiaWF0IjoxNjcyOTY1MTI1LCJleHAiOjE2NzI5NjU3Mjl9.d9SayalbNOmXi8VcABf8_equJZVsi5TfDG8phLJ6eKc")
 

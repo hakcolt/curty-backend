@@ -24,9 +24,11 @@ export class AppWrapper {
       const router = api.router
       api.controllers.forEach((controller) => controller.initializeRoutes(router))
       router.use(notFoundMiddleware)
-      this.app.use(api.path, router)
+      this.app
+      .use(api.path, router)
     }
 
+    this.app.use(cors())
     if (root.controllers.length > 0) {
       root.controllers.forEach((controller) => controller.initializeRoutes(root.router))
       this.app.use("/", root.router)
@@ -34,20 +36,20 @@ export class AppWrapper {
     this.app.use(errorHandler)
   }
 
-  loadMiddleware(component: ServerInput) {
+  loadMiddleware(api: ServerInput) {
     this.app
       .use(helmet())
-      .use(cors())
       .use(resources)
-    component.router
+
+    api.router
       .use(cors({
         credentials: true,
         origin(origin, callback) {
           // if (config.Server.Origins.indexOf(origin!) !== -1 || !origin) // "!origin" allow REST tools and server-to-server requests
-          console.log(origin)
+          console.log("Origin:", origin)
           callback(null, origin)
         },
-        methods: ["GET", "POST", "PUT"]
+        methods: ["GET", "POST", "PUT", "DELETE"]
       }))
       .use(cookieParser())
       .use(express.json())

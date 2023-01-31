@@ -17,6 +17,7 @@ export class LinkModel {
   getBy(input: Record<string, any>): Link[] | null {
     const inputKeys = Object.keys(input)
     const linkKeys = Object.keys(db.links[0])
+
     const linksMatched: Link[] = []
     for (const linkFromDb of db.links) {
       for (const keyToVerify of inputKeys) {
@@ -34,10 +35,23 @@ export class LinkModel {
       name: link.name,
       path: link.path,
       url: link.url,
+      createdAt: link.createdAt,
       userId: link.userId
     }
     db.links.push(linkToPush)
     return linkToPush
+  }
+
+  delete(id: string, userId: string): boolean {
+    const links = db.links
+    for (const index in links) {
+      const link = links[index]
+      if (link.id === id && link.userId === userId) {
+        links.splice(parseInt(index))
+        return true
+      }
+    }
+    return false
   }
 }
 

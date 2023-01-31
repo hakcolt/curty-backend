@@ -33,7 +33,7 @@ export class AuthProvider implements IAuthProvider {
   verifyJWT(token: string, refreshToken: boolean): boolean {
     try {
       return !!jwt.verify(token, refreshToken ? AppSettings.JWT_REFRESH_TOKEN_KEY : AppSettings.JWT_ACCESS_TOKEN_KEY)
-    } catch (e) { return false }
+    } catch (e: any) { return false }
   }
 
   decodeJWT(token: string): TokenArgs {

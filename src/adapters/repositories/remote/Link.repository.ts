@@ -13,8 +13,8 @@ export class RemoteLinkRepository implements ILinkRepository {
         where,
         data: attributes
       })
-      return link as Link
-    } catch (e) {
+      return link as unknown as Link
+    } catch (e: any) {
       if (AppSettings.SERVER_MODE === "development") console.log(e)
       return null
     }
@@ -23,8 +23,8 @@ export class RemoteLinkRepository implements ILinkRepository {
   async fetchBy(attributes: Record<string, any>): Promise<Link | null> {
     try {
       const link = await prisma.link.findUnique({ where: attributes })
-      return link as Link
-    } catch (e) {
+      return link as unknown as Link
+    } catch (e: any) {
       if (AppSettings.SERVER_MODE === "development") console.log(e)
       return null
     }
@@ -35,8 +35,8 @@ export class RemoteLinkRepository implements ILinkRepository {
       const links = await prisma.link.findMany({
         where: attributes
       })
-      return links as Link[]
-    } catch (e) {
+      return links as unknown as Link[]
+    } catch (e: any) {
       if (AppSettings.SERVER_MODE === "development") console.log(e)
       return []
     }
@@ -49,13 +49,29 @@ export class RemoteLinkRepository implements ILinkRepository {
           name: data.name,
           path: data.path,
           url: data.url,
+          createdAt: data.createdAt,
           user: { connect: { id: data.userId } }
         }
       })
-      return link as Link
-    } catch (e) {
+      return link as unknown as Link
+    } catch (e: any) {
       if (AppSettings.SERVER_MODE === "development") console.log(e)
       return null
+    }
+  }
+
+  async deleteOne(where: Record<string, any>): Promise<boolean> {
+    try {
+      const result = await prisma.link.deleteMany({
+        where: {
+          id: where.id,
+          userId: where.userId
+        }
+      })
+      return !!result.count
+    } catch (e: any) {
+      if (process.env.NODE_ENV === "development") console.log(e)
+      return false
     }
   }
 }

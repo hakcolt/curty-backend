@@ -17,13 +17,10 @@ export class ListLinkUseCase extends BaseUseCase {
     const result = new ResultData<Link[]>()
 
     const link = await this.repository.fetchListBy({ userId: userInfo.id })
-    if (link.length < 1) {
-      result.setMessage(this.resources.get(strings.EMPTY_LIST), 200)
-      return result
-    }
-
-    result.setMessage(this.resources.get(strings.SUCCESSFUL_OPERATION), 200)
+    if (link.length) result.setMessage(this.resources.get(strings.SUCCESSFUL_OPERATION), 200)
+    else result.setMessage(this.resources.get(strings.EMPTY_LIST), 200)
     result.data = link
+
     return result
   }
 }

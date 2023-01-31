@@ -43,6 +43,7 @@ const db: DB = {
       "name": "Linkedin",
       "path": "/linkedin",
       "url": "https://linkedin.com/in/hakcolt",
+      "createdAt": "1856-06-15T18:30:51.876-05:00",
       "userId": "9177a65d-6f83-478d-954d-10be5a2df24d"
     }
   ]

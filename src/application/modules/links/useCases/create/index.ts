@@ -34,7 +34,7 @@ export class CreateLinkUseCase extends BaseUseCase {
       return result
     }
 
-    await this.createLink(result, linkDTO as ILink)
+    await this.createLink(result, linkDTO.toDomain())
 
     return result
   }

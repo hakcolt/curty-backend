@@ -14,7 +14,7 @@ export class RemoteUserRepository implements IUserRepository {
         data: attributes
       })
       return (user as unknown) as User
-    } catch (e) {
+    } catch (e: any) {
       if (AppSettings.SERVER_MODE === "development") console.log(e)
       return null
     }
@@ -26,7 +26,7 @@ export class RemoteUserRepository implements IUserRepository {
         where: attributes
       })
       return (user as unknown) as User
-    } catch (e) {
+    } catch (e: any) {
       if (AppSettings.SERVER_MODE === "development") console.log(e)
       return null
     }
@@ -48,7 +48,7 @@ export class RemoteUserRepository implements IUserRepository {
         }
       })
       return (user as unknown) as User
-    } catch (e) {
+    } catch (e: any) {
       if (AppSettings.SERVER_MODE === "development") console.log(e)
       return null
     }

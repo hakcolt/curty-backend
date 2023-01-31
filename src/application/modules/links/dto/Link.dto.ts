@@ -1,3 +1,5 @@
+import { ILink } from "../../../../domain/link/ILink"
+import { Link } from "../../../../domain/link/Link"
 import { plurals, Resources } from "../../../shared/locals"
 import { Result } from "../../../shared/useCases/BaseUseCase"
 import validation from "../../../shared/utils/Validation"
@@ -10,7 +12,6 @@ export class LinkInput {
 }
 
 export class LinkDTO {
-  id: string | null
   name: string | undefined
   path: string
   url: string
@@ -45,5 +46,16 @@ export class LinkDTO {
       return false
     }
     return true
+  }
+
+  toDomain(): ILink {
+    const link: ILink = new Link()
+    link.id = undefined
+    link.name = this.name
+    link.path = this.path
+    link.url = this.url
+    link.createdAt = new Date().toISOString()
+    link.userId = this.userId
+    return link
   }
 }
