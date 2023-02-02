@@ -1,6 +1,6 @@
 import { BaseUseCase, ResultData } from "../../../../shared/useCases/BaseUseCase"
 import { plurals, Resources, strings } from "../../../../shared/locals"
-import { URLConstraint } from "../../../../shared/settings/Constraints"
+import { URLConstants } from "../../../../shared/settings/Constants"
 import { ILinkRepository } from "../../providerContracts/ILink.repository"
 import { LinkDTO, LinkInput } from "../../dto/Link.dto"
 import { IUserRepository } from "../../../users/providerContracts/IUser.repository"
@@ -43,7 +43,7 @@ export class CreateLinkUseCase extends BaseUseCase {
     const link = await this.linkRepository.create(data)
 
     if (link) {
-      result.setMessage(this.resources.get(strings.SUCCESSFUL_OPERATION), 201, URLConstraint.Links.List.path)
+      result.setMessage(this.resources.get(strings.SUCCESSFUL_OPERATION), 201, URLConstants.Links.List.path)
       result.data = link
     }
     else result.setError(this.resources.get(strings.SOMETHING_WAS_WRONG), 409)

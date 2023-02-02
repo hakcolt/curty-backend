@@ -3,7 +3,7 @@ import { RegisterUserUseCase } from "."
 import { LocalUserRepository } from "../../../../../adapters/repositories/local/User.repository"
 import { AuthProvider } from "../../../../../adapters/providers/Auth.provider"
 import { createResource, plurals, strings } from "../../../../shared/locals"
-import { URLConstraint } from "../../../../shared/settings/Constraints"
+import { URLConstants } from "../../../../shared/settings/Constants"
 
 describe("when try to register user", () => {
   let registerUseCase: RegisterUserUseCase
@@ -27,7 +27,7 @@ describe("when try to register user", () => {
     expect(result.message).toBe(registerUseCase.resources.get(strings.USER_CREATED))
     expect(result.statusCode).toBe(201)
     expect(result.isSuccess).toBeTruthy()
-    expect(result.next).toBe(URLConstraint.Users.SignIn.path)
+    expect(result.next).toBe(URLConstants.Users.SignIn.path)
   })
 
   it("should return a 400 error if user email was invalid", async () => {
@@ -108,7 +108,7 @@ describe("when try to register user", () => {
     expect(result.error).toBeUndefined()
     expect(result.statusCode).toBe(201)
     expect(result.isSuccess).toBeTruthy()
-    expect(result.next).toBe(URLConstraint.Users.SignIn.path)
+    expect(result.next).toBe(URLConstants.Users.SignIn.path)
 
 
     const result2 = await createUser()

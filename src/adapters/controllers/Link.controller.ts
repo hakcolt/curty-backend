@@ -1,6 +1,6 @@
 import { BaseController, IRequest } from "../base/Base.controller"
 import { NextFunction, Request, Response, Router } from "express"
-import { URLConstraint } from "../../application/shared/settings/Constraints"
+import { URLConstants } from "../../application/shared/settings/Constants"
 import { RemoteLinkRepository } from "../repositories/remote/Link.repository"
 import { ListLinkUseCase } from "../../application/modules/links/useCases/list"
 import { CreateLinkUseCase } from "../../application/modules/links/useCases/create"
@@ -20,7 +20,7 @@ export class LinkController extends BaseController {
 
     link.userId = userInfo.id
 
-    this.handleResult(res, next, createLinkService.execute(link))
+    this.handleResult(req, res, next, createLinkService.execute(link))
   }
 
   listLinks = async (request: Request, res: Response, next: NextFunction) => {
@@ -31,7 +31,7 @@ export class LinkController extends BaseController {
 
     const tokenArgs = req.userInfo
 
-    this.handleResult(res, next, listLinkService.execute(tokenArgs))
+    this.handleResult(req, res, next, listLinkService.execute(tokenArgs))
   }
 
   delete = async (request: Request, res: Response, next: NextFunction) => {
@@ -43,20 +43,20 @@ export class LinkController extends BaseController {
     const linkId = req.params.id
     const userInfo = req.userInfo
 
-    this.handleResult(res, next, deleteLinkService.execute({
+    this.handleResult(req, res, next, deleteLinkService.execute({
       id: linkId,
       userId: userInfo.id
     }))
   }
 
   override initializeRoutes(router: Router) {
-    const listLinkUrl = URLConstraint.Links.List
+    const listLinkUrl = URLConstants.Links.List
     router[listLinkUrl.method](listLinkUrl.path, this.listLinks)
 
-    const createLinkUrl = URLConstraint.Links.Create
+    const createLinkUrl = URLConstants.Links.Create
     router[createLinkUrl.method](createLinkUrl.path, this.create)
 
-    const deleteLinkUrl = URLConstraint.Links.Delete
+    const deleteLinkUrl = URLConstants.Links.Delete
     router[deleteLinkUrl.method](deleteLinkUrl.path, this.delete)
   }
 }

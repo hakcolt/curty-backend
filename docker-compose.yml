@@ -1,10 +1,23 @@
-version: "3.9"
 services:
   api:
-    build: .
-    env_file:
-      - .env
-    command: sh -c "npm run prisma:deploy"
+    image: node:19.5-alpine
     ports:
       - 3000:3000
     working_dir: /app
+    volumes:
+      - ./:/app
+    env_file:
+      - .env
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/curty?schema=public
+    command: sh -c "npm run prisma:dev && npm run dev"
+  postgres:
+    image: postgres:latest
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+volumes:
+  db-data:

@@ -1,7 +1,7 @@
 import { BaseUseCase, ResultData } from "../../../../shared/useCases/BaseUseCase"
 import { Result } from "../../../../shared/useCases/BaseUseCase"
 import { Resources, strings } from "../../../../shared/locals"
-import { URLConstraint } from "../../../../shared/settings/Constraints"
+import { URLConstants } from "../../../../shared/settings/Constants"
 import { ILinkRepository } from "../../../links/providerContracts/ILink.repository"
 import { AppSettings } from "../../../../shared/settings/AppSettings"
 
@@ -20,7 +20,7 @@ export class RedirectUseCase extends BaseUseCase {
     if (!link) {
       result.setError(
         this.resources.get(strings.NOT_FOUND),
-        404, AppSettings.SERVER_API_PATH + URLConstraint.Users.SignIn.path
+        404, AppSettings.SERVER_API_PATH + URLConstants.Users.SignIn.path
       )
       return result
     }

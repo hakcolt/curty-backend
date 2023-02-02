@@ -1,6 +1,6 @@
 import { beforeAll, describe, expect, it } from "vitest"
 import { createResource, plurals, strings } from "../../../../shared/locals"
-import { URLConstraint } from "../../../../shared/settings/Constraints"
+import { URLConstants } from "../../../../shared/settings/Constants"
 import { CreateLinkUseCase } from "."
 import { LocalLinkRepository } from "../../../../../adapters/repositories/local/Link.repository"
 import { LocalUserRepository } from "../../../../../adapters/repositories/local/User.repository"
@@ -26,7 +26,7 @@ describe("when try to create link", () => {
     expect(result.message).toBe(createLinkUseCase.resources.get(strings.SUCCESSFUL_OPERATION))
     expect(result.statusCode).toBe(201)
     expect(result.isSuccess).toBeTruthy()
-    expect(result.next).toBe(URLConstraint.Links.List.path)
+    expect(result.next).toBe(URLConstants.Links.List.path)
   })
 
   it("should return a 400 error if URL and path is invalid", async () => {
@@ -58,7 +58,7 @@ describe("when try to create link", () => {
     expect(result.error).toBeUndefined()
     expect(result.statusCode).toBe(201)
     expect(result.isSuccess).toBeTruthy()
-    expect(result.next).toBe(URLConstraint.Links.List.path)
+    expect(result.next).toBe(URLConstants.Links.List.path)
 
 
     const result2 = await createUser()

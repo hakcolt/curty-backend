@@ -6,7 +6,7 @@ import { User } from "../../../../../domain/user/User"
 import { IAuthProvider } from "../../providerContracts/IAuth.provider"
 import { strings, Resources } from "../../../../shared/locals"
 import { UserTokenDTO } from "../../dto/UserToken.dto"
-import { URLConstraint } from "../../../../shared/settings/Constraints"
+import { URLConstants } from "../../../../shared/settings/Constants"
 
 export class LoginUserUseCase extends BaseUseCase {
   constructor(
@@ -55,7 +55,7 @@ export class LoginUserUseCase extends BaseUseCase {
   createAccessToken(result: ResultData<UserTokenDTO>, user: User, credentialDTO: CredentialDTO): void {
     const accessToken = this.authProvider.getJWT({ id: user.id!, email: credentialDTO.email }, false)
 
-    result.setMessage(this.resources.get(strings.LOGIN_SUCESSFUL), 200, URLConstraint.Users.Refresh.path)
+    result.setMessage(this.resources.get(strings.LOGIN_SUCESSFUL), 200, URLConstants.Users.Refresh.path)
     const userDto = new UserTokenDTO(accessToken, user)
     result.data = userDto
   }

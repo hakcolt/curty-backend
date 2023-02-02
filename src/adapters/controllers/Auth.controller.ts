@@ -3,7 +3,7 @@ import { LoginUserUseCase } from "../../application/modules/auth/useCases/signIn
 import { AuthProvider } from "../providers/Auth.provider"
 import { RefreshTokenUseCase } from "../../application/modules/auth/useCases/refresh"
 import { NextFunction, Request, Response, Router } from "express"
-import { URLConstraint } from "../../application/shared/settings/Constraints"
+import { URLConstants } from "../../application/shared/settings/Constants"
 import { RemoteUserRepository } from "../repositories/remote/User.repository"
 
 export class AuthController extends BaseController {
@@ -17,7 +17,7 @@ export class AuthController extends BaseController {
 
     const token = req.cookies["nodeA2.refreshToken"]
 
-    this.handleResult(res, next, refreshTokenService.execute(token))
+    this.handleResult(req, res, next, refreshTokenService.execute(token))
   }
 
   signIn = async (request: Request, res: Response, next: NextFunction) => {
@@ -29,14 +29,14 @@ export class AuthController extends BaseController {
 
     const credentials = req.body
 
-    this.handleResult(res, next, loginService.execute(credentials))
+    this.handleResult(req, res, next, loginService.execute(credentials))
   }
 
   override initializeRoutes(router: Router) {
-    const refreshUrl = URLConstraint.Users.Refresh
+    const refreshUrl = URLConstants.Users.Refresh
     router[refreshUrl.method](refreshUrl.path, this.refresh)
     
-    const signInUrl = URLConstraint.Users.SignIn
+    const signInUrl = URLConstants.Users.SignIn
     router[signInUrl.method](signInUrl.path, this.signIn)
   }
 }

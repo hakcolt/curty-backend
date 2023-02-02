@@ -1,4 +1,4 @@
-FROM node:19.4-alpine AS build
+FROM node:19.5-alpine AS build
 WORKDIR /app/build
 COPY package*.json ./
 RUN npm ci
@@ -7,8 +7,9 @@ RUN npm run prisma:generate
 COPY ./ ./
 RUN npm run build
 
-FROM node:19.4-alpine
+FROM node:19.5-alpine
 WORKDIR /app
+COPY .env ./
 COPY package*.json ./
 RUN npm ci --production
 COPY --from=build /app/build/dist ./dist

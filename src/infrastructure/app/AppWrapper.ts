@@ -25,7 +25,7 @@ export class AppWrapper {
       api.controllers.forEach((controller) => controller.initializeRoutes(router))
       router.use(notFoundMiddleware)
       this.app
-      .use(api.path, router)
+        .use(api.path, router)
     }
 
     this.app.use(cors())
@@ -45,9 +45,8 @@ export class AppWrapper {
       .use(cors({
         credentials: true,
         origin(origin, callback) {
-          // if (config.Server.Origins.indexOf(origin!) !== -1 || !origin) // "!origin" allow REST tools and server-to-server requests
-          console.log("Origin:", origin)
-          callback(null, origin)
+          if (config.Server.Origins.indexOf(origin!) !== -1 || !origin) // "!origin" allow REST tools and server-to-server requests
+            callback(null, origin)
         },
         methods: ["GET", "POST", "PUT", "DELETE"]
       }))
