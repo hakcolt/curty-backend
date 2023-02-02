@@ -5,9 +5,15 @@
   "customizations": {
     "vscode": {
       "extensions": [
-        "prisma.prisma",
-        "ms-azuretools.vscode-docker"
+        "prisma.prisma"
       ]
+    }
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "18"
     }
   }
 }
