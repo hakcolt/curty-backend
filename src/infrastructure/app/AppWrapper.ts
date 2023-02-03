@@ -6,6 +6,7 @@ import { BaseController } from "../../adapters/base/Base.controller"
 import { AppSettings } from "../../application/shared/settings/AppSettings"
 import { resources, verifyToken, notFoundMiddleware, errorHandler } from "../middlewares"
 import config from "../config"
+import { URLConstants } from "../../application/shared/settings/Constants"
 
 export interface ServerInput { path: string, router: Router, controllers: BaseController[] }
 
@@ -33,6 +34,7 @@ export class AppWrapper {
       root.controllers.forEach((controller) => controller.initializeRoutes(root.router))
       this.app.use("/", root.router)
     }
+    this.app.use("/", (req, res) => res.status(303).redirect(`${api.path}${URLConstants.Health.Ping.path}`))
     this.app.use(errorHandler)
   }
 

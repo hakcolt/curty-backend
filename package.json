@@ -7,7 +7,7 @@
     "build": "rm -rf dist/**/* && tsc --sourceMap false",
     "test": "vitest",
     "coverage": "vitest --coverage",
-    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "dev": "ts-node-dev --poll --respawn --transpile-only src/index.ts",
     "prisma:generate": "prisma generate",
     "prisma:deploy": "prisma migrate deploy",
     "prisma:dev": "prisma migrate dev",

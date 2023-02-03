@@ -4,6 +4,9 @@
   "forwardPorts": [3000],
   "customizations": {
     "vscode": {
+      "settings": {
+        "files.autoSave": "off"
+      },
       "extensions": [
         "prisma.prisma"
       ]

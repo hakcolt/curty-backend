@@ -1,6 +1,14 @@
 services:
+  postgres:
+    image: postgres:latest
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
   api:
-    image: node:19.5-alpine
+    image: node:18-alpine
     ports:
       - 3000:3000
     working_dir: /app
@@ -11,13 +19,5 @@ services:
     environment:
       - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/curty?schema=public
     command: sh -c "npm run prisma:dev && npm run dev"
-  postgres:
-    image: postgres:latest
-    volumes:
-      - db-data:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=postgres
 volumes:
   db-data:
