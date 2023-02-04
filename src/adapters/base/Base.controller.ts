@@ -12,13 +12,13 @@ export abstract class BaseController {
     if (result.isSuccess && result instanceof ResultData) {
       const cookie = result.cookie
       const origin = req.headers.origin
-      if (cookie && (!origin || AppSettings.SERVER_ORIGINS.indexOf(origin!) !== -1)) {
+      if (cookie && (!origin || AppSettings.SERVER_ALLOWED_ORIGINS.indexOf(origin) !== -1)) {
         res.cookie(cookie.name, cookie.value, {
           expires: cookie.expires,
           sameSite: "none",
           httpOnly: true,
           secure: true,
-          domain: req.headers.host
+          domain: AppSettings.SERVER_HOST
         })
       }
 

@@ -10,8 +10,8 @@ export default {
     ApiPath: process.env.SERVER_API_PATH || "/api",
     Host: process.env.SERVER_HOST || "localhost",
     Port: process.env.SERVER_PORT || 3000,
-    Origins:
-      (process.env.ORIGINS || "http://localhost:3100")
+    AllowedOrigins:
+      (process.env.ALLOWED_ORIGINS || "http://localhost:3100")
         .replace(/\s/, "")
         .split(",")
   },

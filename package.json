@@ -1,5 +1,5 @@
 {
-  "name": "curty-backend",
+  "name": "curty-ra",
   "version": "1.0.0",
   "description": "Backend to Curty URL Shortner",
   "main": "./dist/index.js",

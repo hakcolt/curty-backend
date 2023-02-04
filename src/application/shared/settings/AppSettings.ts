@@ -7,7 +7,7 @@ export class AppSettings {
   static SERVER_PORT: string
   static SERVER_HOST: string
   static SERVER_API_PATH: string
-  static SERVER_ORIGINS: string[]
+  static SERVER_ALLOWED_ORIGINS: string[]
 
   static init(configs: Record<string, any>) {
     this.JWT_REFRESH_TOKEN_KEY = configs.Security.JWT.RefreshToken.SecretKey
@@ -18,6 +18,6 @@ export class AppSettings {
     this.SERVER_PORT = configs.Server.Port
     this.SERVER_HOST = configs.Server.Host
     this.SERVER_API_PATH = configs.Server.ApiPath
-    this.SERVER_ORIGINS = configs.Server.Origins
+    this.SERVER_ALLOWED_ORIGINS = configs.Server.AllowedOrigins
   }
 }

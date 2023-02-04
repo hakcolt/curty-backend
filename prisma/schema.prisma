@@ -27,13 +27,13 @@ model User {
 }
 
 model Link {
-  id     String  @id @default(uuid())
-  name   String? @default("No Name")
-  path   String  @unique
-  url    String
+  id        String   @id @default(uuid())
+  name      String?  @default("No Name")
+  path      String   @unique
+  url       String
   createdAt DateTime @default(now())
-  user   User    @relation(fields: [userId], references: [id])
-  userId String
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
 
   @@map("links")
 }
